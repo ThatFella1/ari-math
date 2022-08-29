@@ -1,5 +1,6 @@
 import random
 import sys
+import os
 
 def create_number(digits):
 	# print(digits)
@@ -28,17 +29,19 @@ def is_number(s):
 	except ValueError:
 		return False
 
-def run(digits):
+def run(level):
 	print("Hi, Ari!  Welcome to our game!")
 	user_answer = ''
 	score = 0
 	while 1==1:
 		print()
 		print("Score: " + str(score))
-		answer = create_problem(digits)
+		answer = create_problem(level+1)
+
+		#continue to try again/get another reponse.  break for next question.
 		while 1==1:
 			# print("Debug: answer is " + str(answer))
-			user_answer = input("Enter Answer: ")
+			user_answer = input("Enter Answer (or (s)kip question or (q)uit): ")
 			# print("Debug: user_answer is " + str(user_answer))
 			if is_number(user_answer):
 				if (abs(answer - float(user_answer))) < 0.01:
@@ -46,9 +49,15 @@ def run(digits):
 					score = score + POINT_VALUE
 					break
 				else:
-					print("WRONG! The answer is " + str(answer))
-					break
-			elif user_answer == 'q':
+					print("Hmm, that's not quite right. Try again.")
+					continue
+			elif user_answer.lower() == 's':
+				print("The answer was " + str(answer) + ".")
+				print("No worries, let's try another one.")
+				#TODO: os.system line is system-dependent
+				os.system("pause")
+				break
+			elif user_answer.lower() == 'q':
 				print("Your final score was: " + str(score))
 				print("Thanks for playing!  GOODBYE!")
 				print()
@@ -60,7 +69,6 @@ level = 1
 
 if len(sys.argv) > 1:
 	if sys.argv[1].isnumeric():
-		level = int(sys.argv[1]) - 1
-		run(int(sys.argv[1]))
-else:
-	run(2)
+		level = int(sys.argv[1])
+
+run(level)
