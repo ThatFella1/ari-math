@@ -29,10 +29,12 @@ def is_number(s):
 		return False
 
 def run(digits):
-	print("Hi, Ari!  Can you solve this problem?")
+	print("Hi, Ari!  Welcome to our game!")
 	user_answer = ''
+	score = 0
 	while 1==1:
 		print()
+		print("Score: " + str(score))
 		answer = create_problem(digits)
 		while 1==1:
 			# print("Debug: answer is " + str(answer))
@@ -40,24 +42,25 @@ def run(digits):
 			# print("Debug: user_answer is " + str(user_answer))
 			if is_number(user_answer):
 				if (abs(answer - float(user_answer))) < 0.01:
-					print("CORRECT!")
+					print("CORRECT! +" + str(POINT_VALUE) + " points")
+					score = score + POINT_VALUE
 					break
 				else:
 					print("WRONG! The answer is " + str(answer))
 					break
 			elif user_answer == 'q':
+				print("Your final score was: " + str(score))
 				print("Thanks for playing!  GOODBYE!")
 				print()
 				return
 
-	# user_answer = float(input("Enter Answer: "))
-	# if (answer - user_answer) < 0.01:
-	# 	print("Correct!")
-	# else:
-	# 	print("The answer is " + str(answer))
+POINT_VALUE = 10
+POINT_THRESHOLD = POINT_VALUE * 5
+level = 1
 
 if len(sys.argv) > 1:
 	if sys.argv[1].isnumeric():
+		level = int(sys.argv[1]) - 1
 		run(int(sys.argv[1]))
 else:
 	run(2)
