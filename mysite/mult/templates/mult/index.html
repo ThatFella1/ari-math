@@ -5,12 +5,22 @@
     <title>Ari's Multiplication Game</title>
   </head>
   <body>
-	<p style="font-size:25px">Level: {{level}}</p>
-	<p style="font-size:25px">Score: {{score}}</p>
-	<form action="">
-    	<p style="font-size:50px">{{num1}} x {{num2}}</p>
-		<input type="text" id="answer" name="answer">
-		<input type="submit" value="Submit">
+	<p style="font-size:25px;color:lightseagreen">Level: {{level}}</p>
+	<p style="font-size:25px;color:lightslategray">Score: {{score}}</p>
+	<form method="post" action="" id="questionForm">
+		{% csrf_token %}
+    	<p style="font-size:50px;color:dodgerblue">{{num1}} x {{num2}}</p>
+		<input type="hidden" id="num1" name="num1" value="{{num1}}">
+		<input type="hidden" id="num2" name="num2" value="{{num2}}">
+		<input type="hidden" id="answer" name="answer" value="{{answer}}">
+		<input type="hidden" id="nCorrect" name="nCorrect" value="{{nCorrect}}">
+		<input type="hidden" id="level" name="level" value="{{level}}">
+		<input type="hidden" id="score" name="score" value="{{score}}">
+		<input type="text" id="user_answer" name="user_answer">
+		<button type="submit" name="response" value="user_answer" form="questionForm">Submit Answer</button>
+		<button type="submit" name="response" value="skip" form="questionForm">Skip Question</button>
+		<button type="submit" name="response" value="quit" form="questionForm">Quit</button>
 	</form>
+	<h1 style="color:firebrick">{{ message }}</p>
   </body>
 </html>
