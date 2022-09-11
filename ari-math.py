@@ -50,7 +50,7 @@ def run(level):
 				if (abs(answer - float(user_answer))) < 0.01:
 					print("CORRECT! +" + str(POINT_VALUE*level) + " points")
 					score = score + POINT_VALUE*level
-					nCorrect += 1
+					nCorrect = nCorrect + 1
 
 					#Check Level Up
 					if nCorrect % LEVEL_THRESHOLD == 0:
@@ -72,7 +72,7 @@ def run(level):
 				break
 			elif user_answer.lower() == 'q':
 				print("Your final score was: " + str(score))
-				print("Thanks for playing!  GOODBYE!")
+				print("Thanks for playing, Ari!  GOODBYE!")
 				print()
 				return
 
